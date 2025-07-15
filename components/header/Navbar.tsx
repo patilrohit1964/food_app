@@ -1,14 +1,18 @@
-import { Search, ShoppingBag, ShoppingCart } from "lucide-react";
+"use client";
+import { SignedIn, UserButton } from "@clerk/nextjs";
+import { Menu, Search, ShoppingCart, X } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import { useState } from "react";
+import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
 type Props = {};
 
 const Navbar = (props: Props) => {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop:blur-sm">
-      <div className="container mx-auto flex h-14 items-center justify-between">
+      <div className="container mx-auto flex h-14 items-center justify-between p-2">
         {/* left section of navbar */}
         <div className="flex items-center space-x-4 md:space-x-6">
           <Link href={"/"} className="font-bold text-lg">
@@ -30,16 +34,36 @@ const Navbar = (props: Props) => {
         {/* right section of navbar */}
         <div className="flex items-center space-x-3 md:space-x-4">
           <div className="relative hidden sm:block">
-            <Search className="absolute left-3 top-1/3 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-3 top-6/12 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="Search menu..."
               className="pl-10 w-[160px] md:w-[250px]"
             />
-            {/* cart */}
-            <Link href={"/cart"} className="relative">
-              <ShoppingCart className="h-5 w-5" />
-            </Link>
           </div>
+          {/* cart */}
+          <Link href={"/cart"} className="relative">
+            <Button variant={"ghost"}>
+              <ShoppingCart className="h-5 w-5" />
+              <span className="absolute -top-1 right-2 h-4 w-4 flex items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                10
+              </span>
+            </Button>
+          </Link>
+          {/* user auth */}
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+          {/* mobile device */}
+          <Button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden focus:outline"
+          >
+            {menuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </Button>
         </div>
       </div>
     </header>
