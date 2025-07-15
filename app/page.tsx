@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen overflow-hidden">
       <main className="flex-1">
         <section className="relative h-[80vh] max-h-[800px]">
           <div className="absolute inset-0 bg-black/50 z-10">
