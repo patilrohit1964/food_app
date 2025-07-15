@@ -57,6 +57,8 @@ const Navbar = (props: Props) => {
           <Button
             onClick={() => setMenuOpen(!menuOpen)}
             className="md:hidden focus:outline"
+            size={"icon"}
+            variant={"ghost"}
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -64,6 +66,22 @@ const Navbar = (props: Props) => {
               <Menu className="h-5 w-5" />
             )}
           </Button>
+          {menuOpen && (
+            <div className="md:hidden px-4 py-2 border-t bg-background space-y-2">
+              {/* menu items for mobile */}
+              <nav className="hidden md:flex items-center space-x-6">
+                <Link href={"/menu"} className="text-sm font-medium">
+                  Menu
+                </Link>
+                <Link href={"/about"} className="text-sm font-medium">
+                  About
+                </Link>
+                <Link href={"/admin"} className="text-sm font-medium">
+                  Admin
+                </Link>
+              </nav>
+            </div>
+          )}
         </div>
       </div>
     </header>
