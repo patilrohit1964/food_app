@@ -66,24 +66,26 @@ const Navbar = (props: Props) => {
               <Menu className="h-5 w-5" />
             )}
           </Button>
-          {menuOpen && (
-            <div className="md:hidden px-4 py-2 border-t bg-background space-y-2">
-              {/* menu items for mobile */}
-              <nav className="hidden md:flex items-center space-x-6">
-                <Link href={"/menu"} className="text-sm font-medium">
-                  Menu
-                </Link>
-                <Link href={"/about"} className="text-sm font-medium">
-                  About
-                </Link>
-                <Link href={"/admin"} className="text-sm font-medium">
-                  Admin
-                </Link>
-              </nav>
-            </div>
-          )}
         </div>
       </div>
+      {menuOpen && (
+        <div className="md:hidden px-4 py-2 border-t bg-background space-y-2">
+          {/* menu items for mobile */}
+          <Link href={"/menu"} className="block text-sm font-medium">
+            Menu
+          </Link>
+          <Link href={"/about"} className="block text-sm font-medium">
+            About
+          </Link>
+          <Link href={"/admin"} className="block text-sm font-medium">
+            Admin
+          </Link>
+          <div className="relative mt-2">
+            <Search className="absolute left-3 top-6/12 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input placeholder="Search menu..." className="pl-10 " />
+          </div>
+        </div>
+      )}
     </header>
   );
 };
