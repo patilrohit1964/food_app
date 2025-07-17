@@ -1,3 +1,6 @@
+import CtaSection from "@/components/CtaSection";
+import Footer from "@/components/Footer";
+import Testimonials from "@/components/Testimonials";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Clock, Leaf, Utensils } from "lucide-react";
 import Image from "next/image";
@@ -74,8 +77,11 @@ export default function Home() {
         </section>
         {/* menu preview section */}
         {/* testimonials */}
+        <Testimonials />
         {/* cta section */}
+        <CtaSection />
       </main>
+      <Footer />
     </div>
   );
 }
