@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Clock, Utensils } from "lucide-react";
+import { ChevronRight, Clock, Leaf, Utensils } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -63,7 +63,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-col items-center text-center p-6 rounded-lg bg-background">
-                <Clock className="h-10 w-10 mb-4 text-primary" />
+                <Leaf className="h-10 w-10 mb-4 text-primary" />
                 <h3 className="text-xl font-bold mb-2">Frsh Ingradients</h3>
                 <p className="text-muted-foreground">
                   Locallt-sourced, organic produce
@@ -72,6 +72,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+        {/* menu preview section */}
+        {/* testimonials */}
+        {/* cta section */}
       </main>
     </div>
   );
