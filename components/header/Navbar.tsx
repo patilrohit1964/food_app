@@ -43,7 +43,7 @@ const Navbar = (props: Props) => {
           {/* cart */}
           <Link href={"/cart"} className="relative">
             <Button variant={"ghost"}>
-              <ShoppingCart className="h-5 w-5" />
+              <ShoppingCart className="h-5 w-5 cursor-pointer" />
               <span className="absolute -top-1 right-2 h-4 w-4 flex items-center justify-center rounded-full bg-red-500 text-xs text-white">
                 10
               </span>
