@@ -37,7 +37,7 @@ export default function Testimonials(props: Props) {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-background p-6 rounded-lg shadow-sm">
+            <div key={index} className="bg-background p-6 rounded-lg shadow-lg">
               <div className="flex mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star
