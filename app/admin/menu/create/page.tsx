@@ -10,6 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import UploadExample from "@/components/UploadImage";
 import Link from "next/link";
 import React from "react";
 
@@ -30,23 +31,34 @@ function page({}: Props) {
         <CardContent>
           <form action="">
             <div className="space-y-2">
-              <Label id="name">Item Name</Label>
-              <Input name="name" placeholder="e.g Roasted Papad" />
+              <Label htmlFor="name">Item Name</Label>
+              <Input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="e.g Roasted Papad"
+              />
             </div>
             <div className="space-y-2 my-5">
-              <Label id="name">Item Name</Label>
+              <Label htmlFor="description">Description</Label>
               <Textarea
-                name="name"
+                name="description"
+                id="description"
                 placeholder="Brief Description of the item"
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label id="name">Price ($)</Label>
-                <Input name="name" type="number" placeholder="0.00" />
+                <Label htmlFor="price">Price ($)</Label>
+                <Input
+                  name="price"
+                  id="price"
+                  type="number"
+                  placeholder="0.00"
+                />
               </div>
               <div className="space-y-2">
-                <Label>Category</Label>
+                <Label htmlFor="category">Category</Label>
                 <Select name="category">
                   <SelectTrigger id="category" className="w-full">
                     <SelectValue placeholder="Select Category"></SelectValue>
@@ -61,7 +73,9 @@ function page({}: Props) {
                 </Select>
               </div>
             </div>
-            <div className="space-y-2"></div>
+            <div className="space-y-2">
+              <UploadExample />
+            </div>
             <Button className="w-full mt-4">Submit</Button>
           </form>
         </CardContent>
