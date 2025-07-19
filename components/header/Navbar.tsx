@@ -50,9 +50,9 @@ const Navbar = (props: Props) => {
             </Button>
           </Link>
           {/* user auth */}
-          <SignedIn>
+          {/* <SignedIn>
             <UserButton />
-          </SignedIn>
+          </SignedIn> */}
           {/* mobile device */}
           <Button
             onClick={() => setMenuOpen(!menuOpen)}
