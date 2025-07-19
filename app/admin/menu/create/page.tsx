@@ -18,12 +18,13 @@ const categories = ["pizza", "pasta", "manchurian", "green chilli"];
 function page({}: Props) {
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
-      <Card className="w-full max-w-4xl">
+      <Card className="w-full max-w-xl">
         <CardHeader>
           <CardTitle className="flex justify-between items-center">
             <h1>Add New Menu Item</h1>
-            <Link href={"/admin/menu"}>All Menu</Link>
-            <Button>All menu list</Button>
+            <Link href={"/admin/menu"}>
+              <Button variant={"link"}>All menu list</Button>
+            </Link>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -60,6 +61,8 @@ function page({}: Props) {
                 </Select>
               </div>
             </div>
+            <div className="space-y-2"></div>
+            <Button className="w-full mt-4">Submit</Button>
           </form>
         </CardContent>
       </Card>
