@@ -17,6 +17,7 @@ import React from "react";
 type Props = {};
 const categories = ["pizza", "pasta", "manchurian", "green chilli"];
 function page({}: Props) {
+  
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
       <Card className="w-full max-w-xl">
