@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -20,12 +21,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { useActionState } from "react";
+import { updateMenuAction, UpdateMenuFormState } from "@/actions/updateMenu";
+import { MenuItem } from "@/lib/generated/prisma";
 const categories = ["pizza", "pasta", "manchurian", "green chilli"];
 
-export function UpdateMenuItem() {
+export function UpdateMenuItem({ item }: { item: MenuItem }) {
+  const [formState, action, isPending] = useActionState(
+    async (prevState: UpdateMenuFormState, formData: FormData) =>
+      await updateMenuAction(prevState, formData, item.id),
+    {
+      errors: {},
+    }
+  );
   return (
     <Dialog>
-      <form>
+      <form action={action}>
         <DialogTrigger asChild>
           <Button variant="outline">
             <Pencil className="h-4 w-4" />
@@ -41,16 +52,24 @@ export function UpdateMenuItem() {
           <div className="grid gap-4">
             <div className="space-y-2">
               <Label htmlFor="name">Item Name</Label>
-              <Input id="name" name="name" defaultValue="Pedro Duarte" />
+              <Input id="name" name="name" defaultValue={item.name} />
+              {formState.errors.name && (
+                <span className="text-sm text-red-500">name is required</span>
+              )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="description">Username</Label>
+              <Label htmlFor="description">Item Description</Label>
               <Textarea
                 id="description"
                 name="description"
-                defaultValue="@peduarte"
+                defaultValue={item.description}
                 placeholder="brief description at the menu item"
               />
+              {formState.errors.description && (
+                <span className="text-sm text-red-500">
+                  description is required
+                </span>
+              )}
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
@@ -59,13 +78,18 @@ export function UpdateMenuItem() {
                   id="price"
                   name="price"
                   type="number"
-                  defaultValue="@peduarte"
+                  defaultValue={item.price}
                   placeholder="0.00"
                 />
+                {formState.errors.price && (
+                  <span className="text-sm text-red-500">
+                    price is required
+                  </span>
+                )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="category">Category ($)</Label>
-                <Select name="category" defaultValue="Pizza">
+                <Select name="category" defaultValue={item.category}>
                   <SelectTrigger id="category" className="w-full">
                     <SelectValue placeholder="select category" />
                   </SelectTrigger>
@@ -77,10 +101,17 @@ export function UpdateMenuItem() {
                     ))}
                   </SelectContent>
                 </Select>
+                {formState.errors.category && (
+                  <span className="text-sm text-red-500">
+                    category is required
+                  </span>
+                )}
               </div>
             </div>
           </div>
-          <Button>Update</Button>
+          <Button type="submit" className="w-full mt-4">
+            Update
+          </Button>
         </DialogContent>
       </form>
     </Dialog>

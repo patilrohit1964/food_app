@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
-type UpdateMenuFormState = {
+export type UpdateMenuFormState = {
   errors: {
     name?: string[];
     description?: string[];
