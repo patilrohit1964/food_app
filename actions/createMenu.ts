@@ -41,12 +41,13 @@ export const createMenuAction = async (
     price: formData.get("price") as string,
     image: formData.get("image") as string,
   });
+  console.log("result", result);
+  console.log("formdata", formData);
   if (!result.success) {
     return {
       errors: result.error.flatten().fieldErrors,
     };
   }
-
   try {
     await prisma.menuItem.create({
       data: {

@@ -127,7 +127,7 @@ const UploadExample = ({ setImageUrl }: UploadExampleProps) => {
   return (
     <>
       {/* File input element using React ref */}
-      <input type="file" ref={fileInputRef} name="image" />
+      <input type="file" ref={fileInputRef}/>
       {/* Button to trigger the upload process */}
       <button type="button" onClick={handleUpload}>
         Upload file

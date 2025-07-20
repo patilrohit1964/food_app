@@ -16,7 +16,7 @@ const page = async (props: Props) => {
   const menuItems = await prisma.menuItem.findMany({
     orderBy: { createdAt: "desc" },
   });
-  console.log('menuItems',menuItems);
+  console.log("menuItems", menuItems);
   return (
     <div className="lg:col-span-2 my-4 container mx-auto">
       <h1 className="font-bold text-2xl">Our Menu</h1>

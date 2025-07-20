@@ -22,7 +22,7 @@ function page({}: Props) {
   const [formState, action, isPending] = useActionState(createMenuAction, {
     errors: {},
   });
-  const [imageUrl, setImageUrl] = useState<string | null>("");
+  const [imageUrl, setImageUrl] = useState<string | null>();
   const handleAction = (formData: FormData) => {
     formData.append("image", imageUrl || "");
     return action(formData);
