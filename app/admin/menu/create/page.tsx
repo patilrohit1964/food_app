@@ -104,7 +104,9 @@ function page({}: Props) {
             <div className="space-y-2">
               <UploadExample setImageUrl={setImageUrl} />
             </div>
-            <Button className="w-full mt-4">Add Menu Item</Button>
+            <Button className="w-full mt-4" disabled={isPending}>
+              {isPending ? "Loading..." : "Add Menu Item"}
+            </Button>
           </form>
         </CardContent>
       </Card>
