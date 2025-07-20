@@ -7,24 +7,29 @@ type CreateMenuFormState = {
   errors: {
     name?: string[];
     description?: string[];
-    category?: [];
-    price?: [];
-    imageUrl?: [];
-    formError?: [];
+    category?: string[];
+    price?: string[];
+    imageUrl?: string[];
+    formError?: string[];
   };
 };
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
   description: z.string().min(1, { message: "description is required" }),
   category: z.string().min(1, { message: "category is required" }),
-  price: z.string().min(0.01, { message: "price must be at least $0.0.1" }),
+  price: z.coerce
+    .number()
+    .min(0.01, { message: "Price must be at least $0.01" }),
   image: z
     .string()
     .url({ message: "image must be a valid url" })
     .optional()
     .or(z.literal("")), //allow empty string
 });
-export const createMenuAction = async (initialState, formData: FormData) => {
+export const createMenuAction = async (
+  initialState: CreateMenuFormState,
+  formData: FormData
+): Promise<CreateMenuFormState> => {
   const result = formSchema.safeParse({
     name: formData.get("name") as string,
     description: formData.get("description") as string,
@@ -39,7 +44,7 @@ export const createMenuAction = async (initialState, formData: FormData) => {
   }
   try {
     // save data in db
-    await prisma.menuItem.create({
+    const res = await prisma.menuItem.create({
       data: {
         name: result.data.name,
         description: result.data.description,
@@ -48,11 +53,12 @@ export const createMenuAction = async (initialState, formData: FormData) => {
         imageUrl: result.data.image!,
       },
     });
+    console.log("res", res);
   } catch (error) {
     if (error instanceof Error) {
       console.log(error);
       return {
-        errors: [error.message],
+        errors: { formError: [error.message] },
       };
     } else {
       return {

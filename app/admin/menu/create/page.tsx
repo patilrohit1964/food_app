@@ -1,3 +1,5 @@
+"use client";
+import { createMenuAction } from "@/actions/createMenu";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,12 +14,19 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import UploadExample from "@/components/UploadImage";
 import Link from "next/link";
-import React from "react";
+import React, { useActionState, useState } from "react";
 
 type Props = {};
 const categories = ["pizza", "pasta", "manchurian", "green chilli"];
 function page({}: Props) {
-  
+  const [formState, action, isPending] = useActionState(createMenuAction, {
+    errors: {},
+  });
+  const [imageUrl, setImageUrl] = useState<string | null>("");
+  const handleAction = (formData: FormData) => {
+    formData.append("image", imageUrl || "");
+    return action(formData);
+  };
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
       <Card className="w-full max-w-xl">
@@ -30,7 +39,7 @@ function page({}: Props) {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <form action="">
+          <form action={handleAction}>
             <div className="space-y-2">
               <Label htmlFor="name">Item Name</Label>
               <Input
@@ -39,6 +48,11 @@ function page({}: Props) {
                 id="name"
                 placeholder="e.g Roasted Papad"
               />
+              {formState.errors.name && (
+                <span className="text-red-600 text-sm">
+                  {formState.errors.name}
+                </span>
+              )}
             </div>
             <div className="space-y-2 my-5">
               <Label htmlFor="description">Description</Label>
@@ -47,6 +61,11 @@ function page({}: Props) {
                 id="description"
                 placeholder="Brief Description of the item"
               />
+              {formState.errors.description && (
+                <span className="text-red-600">
+                  {formState.errors.description}
+                </span>
+              )}
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
@@ -57,6 +76,9 @@ function page({}: Props) {
                   type="number"
                   placeholder="0.00"
                 />
+                {formState.errors.price && (
+                  <span className="text-red-600">{formState.errors.price}</span>
+                )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="category">Category</Label>
@@ -72,12 +94,17 @@ function page({}: Props) {
                     ))}
                   </SelectContent>
                 </Select>
+                {formState.errors.category && (
+                  <span className="text-red-600">
+                    {formState.errors.category}
+                  </span>
+                )}
               </div>
             </div>
             <div className="space-y-2">
-              <UploadExample />
+              <UploadExample setImageUrl={setImageUrl} />
             </div>
-            <Button className="w-full mt-4">Submit</Button>
+            <Button className="w-full mt-4">Add Menu Item</Button>
           </form>
         </CardContent>
       </Card>
