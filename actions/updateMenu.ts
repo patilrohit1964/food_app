@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
-type CreateMenuFormState = {
+type UpdateMenuFormState = {
   errors: {
     name?: string[];
     description?: string[];
@@ -23,23 +23,24 @@ const formSchema = z.object({
   price: z.coerce
     .number()
     .min(0.01, { message: "Price must be at least $0.01" }),
-  image: z
-    .string()
-    .url({ message: "image must be a valid url" })
-    .optional()
-    .or(z.literal("")), //allow empty string
+  //   image: z
+  //     .string()
+  //     .url({ message: "image must be a valid url" })
+  //     .optional()
+  //     .or(z.literal("")), //allow empty string
 });
 
-export const createMenuAction = async (
-  initialState: CreateMenuFormState,
-  formData: FormData
-): Promise<CreateMenuFormState> => {
+export const updateMenuAction = async (
+  initialState: UpdateMenuFormState,
+  formData: FormData,
+  id: string
+): Promise<UpdateMenuFormState> => {
   const result = formSchema.safeParse({
     name: formData.get("name") as string,
     description: formData.get("description") as string,
     category: formData.get("category") as string,
     price: formData.get("price") as string,
-    image: formData.get("image") as string,
+    // image: formData.get("image") as string,
   });
   if (!result.success) {
     return {
@@ -47,13 +48,16 @@ export const createMenuAction = async (
     };
   }
   try {
-    await prisma.menuItem.create({
+    await prisma.menuItem.update({
+      where: {
+        id: id,
+      },
       data: {
         name: result.data.name,
         description: result.data.description,
         category: result.data.category,
         price: result.data.price,
-        imageUrl: result.data.image || "",
+        // imageUrl: result.data.image || "",
       },
     });
   } catch (error) {
@@ -73,5 +77,8 @@ export const createMenuAction = async (
   }
 
   revalidatePath("/admin/menu");
-  redirect("/admin/menu");
+  //   redirect("/admin/menu");
+  return {
+    errors: {},
+  };
 };

@@ -1,3 +1,4 @@
+import DeleteMenuItem from "@/components/DeleteMenuItem";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -7,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { UpdateMenuItem } from "@/components/UpdateMenuItem";
 import { prisma } from "@/lib/prisma";
 import React from "react";
 
@@ -42,7 +44,10 @@ const page = async (props: Props) => {
                     <TableCell>{el.category}</TableCell>
                     <TableCell>{el.price}</TableCell>
                     <TableCell className="text-right">
-                      <div className="flex justify-end space-x-2"></div>
+                      <div className="flex justify-end space-x-2">
+                        <UpdateMenuItem />
+                        <DeleteMenuItem id={el.id} />
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}
