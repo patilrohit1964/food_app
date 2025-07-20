@@ -20,7 +20,7 @@ const page = async (props: Props) => {
   });
   return (
     <div className="lg:col-span-2 my-4 container mx-auto">
-      <h1 className="font-bold text-2xl">Our Menu</h1>
+      <h1 className="font-bold text-2xl mb-3">Our Menu</h1>
       <Card>
         <CardHeader>
           <CardTitle>Current Menu Items</CardTitle>

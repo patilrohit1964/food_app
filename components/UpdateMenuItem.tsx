@@ -36,13 +36,13 @@ export function UpdateMenuItem({ item }: { item: MenuItem }) {
   );
   return (
     <Dialog>
-      <form action={action}>
-        <DialogTrigger asChild>
-          <Button variant="outline">
-            <Pencil className="h-4 w-4" />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+      <DialogTrigger asChild>
+        <Button variant="outline" size={'icon'}>
+          <Pencil className="h-4 w-4" />
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <form action={action}>
           <DialogHeader>
             <DialogTitle>Edit Menu Items</DialogTitle>
             <DialogDescription>
@@ -109,11 +109,16 @@ export function UpdateMenuItem({ item }: { item: MenuItem }) {
               </div>
             </div>
           </div>
-          <Button type="submit" className="w-full mt-4">
-            Update
+          <Button type="submit" className="w-full mt-4" disabled={isPending}>
+            {isPending ? "Loading..." : "Save Changes"}
           </Button>
-        </DialogContent>
-      </form>
+          {formState.errors.formError && (
+            <p className="text-red-500 text-sm mt-2">
+              {formState.errors.formError[0]}
+            </p>
+          )}
+        </form>
+      </DialogContent>
     </Dialog>
   );
 }
