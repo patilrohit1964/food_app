@@ -1,5 +1,6 @@
 "use client";
 import CartItem from "@/components/CartItem";
+import CartSummary from "@/components/CartSummary";
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/store/store";
 import { ArrowLeft, Link2 } from "lucide-react";
@@ -13,7 +14,7 @@ const Cart = (props: Props) => {
   return (
     <div className="container py-8 mx-auto">
       <div className="mb-6">
-        <Button>
+        <Button variant={'ghost'}>
           <Link href={"/menu"} className="flex items-center gap-1">
             <ArrowLeft className="h-4 w-4" />
             Back to menu
@@ -34,13 +35,11 @@ const Cart = (props: Props) => {
             </div>
           )}
         </div>
-        {/* {
-          cartItems.length >0 && (
-            <div className="lg:col-span-1">
-              <cartsu
-            </div>
-          )
-        } */}
+        {cartItems.length > 0 && (
+          <div className="lg:col-span-1">
+            <CartSummary />
+          </div>
+        )}
       </div>
     </div>
   );
