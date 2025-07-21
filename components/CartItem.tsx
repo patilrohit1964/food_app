@@ -13,7 +13,8 @@ const CartItem = ({ item }: { item: Item }) => {
     <div className="flex items-stretch gap-4 border rounded-lg p-4">
       <div className="relative w-24 h-24">
         <Image
-          src={item.imageUrl}
+        //   src={item.imageUrl}
+        src={'/res.jpeg'}
           alt={item.name}
           fill
           className="object-cover rounded-md"
@@ -23,7 +24,7 @@ const CartItem = ({ item }: { item: Item }) => {
         <div className="flex justify-between items-start">
           <div>
             <h3 className="font-medium">{item.name}</h3>
-            <p className="text-muted-foreground text-sm">{item.price}</p>
+            <p className="text-muted-foreground text-sm">${item.price}</p>
           </div>
           <Button
             size={"icon"}
