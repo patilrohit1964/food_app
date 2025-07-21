@@ -1,3 +1,4 @@
+"use client"
 import type { MenuItem as item } from "@/lib/generated/prisma";
 import React from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";

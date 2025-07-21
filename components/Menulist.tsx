@@ -12,7 +12,7 @@ const Menulist = async (props: Props) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
       {menuItems.map((el: item) => (
-        <MenuItem key={el.id} menuItems={el} />
+        <MenuItem key={el.id} menuItem={el} />
       ))}
     </div>
   );
