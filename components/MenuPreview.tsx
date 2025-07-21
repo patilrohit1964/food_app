@@ -43,8 +43,11 @@ const MenuPreview = async (props: Props) => {
               </div>
               <p className="text-muted-foreground">{item.description}</p>
               <div className="flex items-center">
-                {[...Array(5)].map((el) => (
-                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-300" />
+                {[...Array(5)].map((el, idx) => (
+                  <Star
+                    key={idx}
+                    className="h-4 w-4 fill-yellow-400 text-yellow-300"
+                  />
                 ))}
                 <span className="text-sm">4</span>
               </div>
@@ -54,7 +57,7 @@ const MenuPreview = async (props: Props) => {
       </div>
       <div className="text-center mt-12">
         <Button asChild className="group">
-          <Link href={"/admin/menu"}>
+          <Link href={"/menu"}>
             View all menu{" "}
             <ChevronRight className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-all delay-150" />
           </Link>
