@@ -56,9 +56,9 @@ const Navbar = (props: Props) => {
             <Moon />
           </Button>
           {/* user auth */}
-          {/* <SignedIn>
+          <SignedIn>
             <UserButton />
-          </SignedIn> */}
+          </SignedIn>
           {/* mobile device */}
           <Button
             onClick={() => setMenuOpen(!menuOpen)}
