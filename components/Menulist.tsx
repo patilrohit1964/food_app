@@ -1,4 +1,4 @@
-import { MenuItem } from "@/lib/generated/prisma";
+import type { MenuItem as item } from "@/lib/generated/prisma";
 import { prisma } from "@/lib/prisma";
 import React from "react";
 import MenuItem from "./MenuItem";
@@ -10,9 +10,9 @@ const Menulist = async (props: Props) => {
     orderBy: { createdAt: "desc" },
   });
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {menuItems.map((el: MenuItem) => (
-        <MenuItem key={el.id} item={el} />
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
+      {menuItems.map((el: item) => (
+        <MenuItem key={el.id} menuItems={el} />
       ))}
     </div>
   );

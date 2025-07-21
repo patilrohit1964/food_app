@@ -12,15 +12,16 @@ type Props = {
 
 const MenuItem = ({ menuItems }: Props) => {
   return (
-    <Card className="overflow-hidden transition-all hover:shadow-lg">
+    <Card className="overflow-hidden transition-all hover:shadow-lg p-0 pb-4">
       <CardHeader className="p-0 pb-4">
         <ImageKitProvider urlEndpoint={process.env.IMAGEKIT_URI_ENDPOINT}>
           <Image
-            src={menuItems.imageUrl}
+            // src={menuItems.imageUrl}
+            src={"/res.jpeg"}
             width={400}
             height={400}
             alt="picture of the menu"
-            className="object-cover w-full h-48"
+            className="object-cover w-full h-full"
           />
         </ImageKitProvider>
       </CardHeader>
@@ -30,8 +31,8 @@ const MenuItem = ({ menuItems }: Props) => {
           {menuItems.description}
         </p>
       </CardContent>
-      <CardFooter>
-        <span className="font-bold">{menuItems.price}</span>
+      <CardFooter className="flex justify-between items-center">
+        <span className="font-bold">${menuItems.price}</span>
         <Button size={"sm"} className="gap-1 cursor-pointer">
           <Plus className="h-4 w-4" />
           Add To Cart
