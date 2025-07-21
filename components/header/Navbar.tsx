@@ -1,15 +1,17 @@
 "use client";
 import { SignedIn, UserButton } from "@clerk/nextjs";
-import { Menu, Search, ShoppingCart, X } from "lucide-react";
+import { Menu, Moon, Search, ShoppingCart, Sun, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { useStore } from "@/store/store";
 
 type Props = {};
 
 const Navbar = (props: Props) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const cart = useStore((store) => store.cart);
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop:blur-sm">
       <div className="container mx-auto flex h-14 items-center justify-between p-2">
@@ -45,10 +47,14 @@ const Navbar = (props: Props) => {
             <Button variant={"ghost"}>
               <ShoppingCart className="h-5 w-5 cursor-pointer" />
               <span className="absolute -top-1 right-2 h-4 w-4 flex items-center justify-center rounded-full bg-red-500 text-xs text-white">
-                10
+                {cart.length}
               </span>
             </Button>
           </Link>
+          <Button size={"sm"} variant={"outline"}>
+            <Sun />
+            <Moon />
+          </Button>
           {/* user auth */}
           {/* <SignedIn>
             <UserButton />
@@ -77,7 +83,10 @@ const Navbar = (props: Props) => {
           <Link href={"/about"} className="block text-sm font-medium">
             About
           </Link>
-          <Link href={"/admin/menu/create"} className="block text-sm font-medium">
+          <Link
+            href={"/admin/menu/create"}
+            className="block text-sm font-medium"
+          >
             Admin
           </Link>
           <div className="relative mt-2">

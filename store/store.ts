@@ -4,9 +4,9 @@ export interface CartItem {
   id: string;
   name: string;
   description: string;
-  price: string;
-  quantity: string;
-  image: string;
+  price: number;
+  quantity: number;
+  imageUrl: string;
 }
 export interface CartStore {
   cart: CartItem[];
