@@ -26,7 +26,7 @@ const Navbar = (props: Props) => {
             <Link href={"/about"} className="text-sm font-medium">
               About
             </Link>
-            <Link href={"/admin"} className="text-sm font-medium">
+            <Link href={"/admin/menu/create"} className="text-sm font-medium">
               Admin
             </Link>
           </nav>
@@ -77,7 +77,7 @@ const Navbar = (props: Props) => {
           <Link href={"/about"} className="block text-sm font-medium">
             About
           </Link>
-          <Link href={"/admin"} className="block text-sm font-medium">
+          <Link href={"/admin/menu/create"} className="block text-sm font-medium">
             Admin
           </Link>
           <div className="relative mt-2">
