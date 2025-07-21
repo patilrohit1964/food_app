@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronRight, Clock, Leaf, Utensils } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -77,7 +78,10 @@ export default function Home() {
           </div>
         </section>
         {/* menu preview section */}
-        <MenuPreview />
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <MenuPreview />
+        </Suspense>
+
         {/* testimonials */}
         <Testimonials />
         {/* cta section */}

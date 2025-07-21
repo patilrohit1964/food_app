@@ -1,8 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { ImageKitProvider } from "@imagekit/next";
-import { Star } from "lucide-react";
+import { ChevronRight, Star } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 type Props = {};
 
@@ -12,14 +14,14 @@ const MenuPreview = async (props: Props) => {
     take: 3,
   });
   return (
-    <div className="container mx-auto py-16">
+    <section className="container mx-auto py-16">
       <div className="text-center mb-12">
         <h2>Our Signature Dishes</h2>
         <p className=" text-muted-foreground max-w-2xl mx-auto">
           A selection of our pmost popular loved by customer
         </p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
         {menuItems.map((item, idx) => (
           <div className="group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow">
             <div className="relative">
@@ -44,12 +46,21 @@ const MenuPreview = async (props: Props) => {
                 {[...Array(5)].map((el) => (
                   <Star className="h-4 w-4 fill-yellow-400 text-yellow-300" />
                 ))}
+                <span className="text-sm">4</span>
               </div>
             </div>
           </div>
         ))}
       </div>
-    </div>
+      <div className="text-center mt-12">
+        <Button asChild className="group">
+          <Link href={"/admin/menu"}>
+            View all menu{" "}
+            <ChevronRight className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-all delay-150" />
+          </Link>
+        </Button>
+      </div>
+    </section>
   );
 };
 
