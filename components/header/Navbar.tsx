@@ -6,12 +6,21 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useStore } from "@/store/store";
-
+import { useTheme } from "next-themes";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 type Props = {};
 
 const Navbar = (props: Props) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const cart = useStore((store) => store.cart);
+  const { setTheme } = useTheme();
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop:blur-sm">
       <div className="container mx-auto flex h-14 items-center justify-between p-2">
@@ -51,11 +60,22 @@ const Navbar = (props: Props) => {
               </span>
             </Button>
           </Link>
-          <Button size={"sm"} variant={"outline"}>
-            <Sun />
-            <Moon />
-          </Button>
-          {/* user auth */}
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Sun className="dark:hidden" />
+              <Moon className="hidden dark:block" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>Themes</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {["Light", "Dark", "System"].map((el, idx) => (
+                <DropdownMenuItem onClick={() => setTheme(el.toLowerCase())}>
+                  {el}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          {/* user auth with clerk*/}
           <SignedIn>
             <UserButton />
           </SignedIn>
