@@ -12,6 +12,7 @@ The app includes user authentication, image management, state management, and fo
 - **ImageKit** – Cloud-based image storage, optimization, and delivery.
 - **Zustand** – Lightweight state management for managing cart, user data, etc.
 - **Zod** – Type-safe form validation and schema definitions.
+- **shadcn** – Pre-built, accessible, and customizable UI components.
 
 ---
 
